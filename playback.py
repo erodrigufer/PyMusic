@@ -18,15 +18,15 @@ t = np.linspace(0, seconds, seconds * fs, False)
 
 #note3 = np.sin(1.7*frequency * t * 2 * np.pi)
 
-#note = np.sin(437.5 * t * 2 * np.pi) + np.sin(875 * t * 2 * np.pi) + np.sin(1180 * t * 2 * np.pi) + + np.sin(1422 * t *2 * np.pi) # frecuencias de la campanilla
+note = np.sin(437.5 * t * 2 * np.pi) + np.sin(875 * t * 2 * np.pi) + np.sin(1180 * t * 2 * np.pi) + np.sin(1422 * t *2 * np.pi) # frecuencias de la campanilla
 
-note = np.sin(101.6 * t * 2 * np.pi)+ np.sin(171.9 * t * 2 * np.pi)+ np.sin(210 * t * 2 * np.pi) + np.sin(234 * t * 2 *np.pi) + np.sin(265 * t * 2 * np.pi) #sonidillo de tambor
+#note = np.sin(101.6 * t * 2 * np.pi)+ np.sin(171.9 * t * 2 * np.pi)+ np.sin(210 * t * 2 * np.pi) +  np.sin(265 * t * 2 * np.pi) #sonidillo de tambor
 
 #plt.plot(note3)
 #plt.show()
 
-#envelope = np.exp(-t)
-envelope = 1
+envelope = np.exp(-t)
+#envelope = 1
 
 note2 = np.multiply(note,envelope) # element-wise multiplication
 
