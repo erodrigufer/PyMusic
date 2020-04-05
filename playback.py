@@ -1,6 +1,5 @@
 import numpy as np
 import simpleaudio as sa
-import matplotlib.pyplot as plt
 
 
 # Link:
@@ -18,11 +17,14 @@ t = np.linspace(0, seconds, seconds * fs, False)
 
 #note3 = np.sin(1.7*frequency * t * 2 * np.pi)
 
+
+def note_generator():
+
+
+
 note = np.sin(437.5 * t * 2 * np.pi) + np.sin(875 * t * 2 * np.pi) + np.sin(1180 * t * 2 * np.pi) + + np.sin(1422 * t *
 2 * np.pi) # frecuencias de la campanilla
 
-#plt.plot(note3)
-#plt.show()
 
 envelope = np.exp(-t)
 #envelope = 1
@@ -46,4 +48,3 @@ play_obj.wait_done()
 
 #play_obj = sa.play_buffer(audio2, 1, 2, fs)
 #play_obj.wait_done()
-
