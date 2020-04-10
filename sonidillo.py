@@ -14,7 +14,7 @@ frequencies = campanilla # this is the list that will be played
 
 
 fs = 44100  # 44100 samples per second (sample rate)
-seconds = 2  # Note duration of 3 seconds
+seconds = 1  # Note duration of 3 seconds
 pi = np.pi
 steps = [ 0 if i%2 != 0 else 1 for i in range(16)]
 t = np.linspace(0, seconds, seconds * fs, False) # Generate array with seconds*sample_rate steps, ranging between 0 and seconds
@@ -48,12 +48,14 @@ def create_loop(note, steps):
     silence = generate_wave(0)
     
     loop = get_first_step(note,steps[0])
-    i = 1
+    i = 1 # start counting at one to skip the first step that was created with the
+    # get_first_step() function, this is necessary to start with a not empty array
+    # and be therefore able to use the numpy concatenate function
     for step in steps:
     # this for-loop was fucked up before, basically in order to iterate over a list
     # follow this guide:
-    # https: // www.geeksforgeeks.org / iterate - over - a - list - in -python /
-        if step and i > 1:
+    # https://www.geeksforgeeks.org/iterate-over-a-list-in-python/
+        if step and i > 1: # skips first step
             loop = np.concatenate((loop,note))
         elif i > 1:
             loop = np.concatenate((loop,silence))
