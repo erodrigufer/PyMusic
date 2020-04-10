@@ -46,7 +46,10 @@ def create_loop(note, steps):
     
     loop = get_first_step(note,steps[0])
 
-    for step in range(1,len(steps)):
+    for step in steps:
+    # this for-loop was fucked up before, basically in order to iterate over a list
+    # follow this guide:
+    # https: // www.geeksforgeeks.org / iterate - over - a - list - in -python /
         if step:
             loop = np.concatenate((loop,note))
         else:
