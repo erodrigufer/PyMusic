@@ -9,7 +9,10 @@ import simpleaudio as sa
 
 bass_cac_de_moun = [210,265,234,171] # sonido como de bass caca de mono
 campanilla = [437.5,875,1180,1422 ] # campanilla fire
-frequencies = campanilla
+
+frequencies = campanilla # this is the list that will be played
+
+
 fs = 44100  # 44100 samples per second (sample rate)
 seconds = 2  # Note duration of 3 seconds
 pi = np.pi
@@ -45,15 +48,17 @@ def create_loop(note, steps):
     silence = generate_wave(0)
     
     loop = get_first_step(note,steps[0])
-
+    i = 1
     for step in steps:
     # this for-loop was fucked up before, basically in order to iterate over a list
     # follow this guide:
     # https: // www.geeksforgeeks.org / iterate - over - a - list - in -python /
-        if step:
+        if step and i > 1:
             loop = np.concatenate((loop,note))
-        else:
+        elif i > 1:
             loop = np.concatenate((loop,silence))
+        i = i + 1
+
     return loop
 
 def sanitize_audio(loop):
