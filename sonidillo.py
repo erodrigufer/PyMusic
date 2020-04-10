@@ -14,7 +14,7 @@ frequencies = campanilla # this is the list that will be played
 
 
 fs = 44100  # 44100 samples per second (sample rate)
-seconds = 1  # Note duration of 3 seconds
+seconds = 2  # Note duration in seconds
 pi = np.pi
 steps = [ 0 if i%2 != 0 else 1 for i in range(16)]
 t = np.linspace(0, seconds, seconds * fs, False) # Generate array with seconds*sample_rate steps, ranging between 0 and seconds
@@ -28,7 +28,9 @@ def generate_wave(frequency):
 
 # Adds a sine wave from each frequency in frequencies
 def create_note(frequencies):
-    return sum([generate_wave(frequency) for frequency in frequencies]) 
+    return sum([generate_wave(frequency) for frequency in frequencies])
+    '''TODO: esta linea con sum() se ve fresh, pero creo que la version correcta/segura seria con np.add
+    porque el data type es numpy array'''
 
 # Creates envelope with exponential function to apply to note
 def create_envelope():
@@ -76,6 +78,12 @@ def play_audio(audio):
     # Wait for playback to finish before exiting
     play_obj.wait_done()
 
+def create_track(frequencies,steps): # uses frequencies and steps as inputs
+    # not the global variables
+    note = create_note(frequencies)
+    note = apply_envelope(note)
+    loop = create_loop(note,steps)
+    return loop
 
 def start_synth():
     note = create_note(frequencies)
@@ -91,6 +99,22 @@ def start_synth():
     # 16 steps
     play_audio(audio)
 
+# ----------------------------------------------------------------------------
+# --------------- main program -----------------------------------------------
 # pvpvpvpv
-start_synth()
+# start_synth()
+
+
+# ----------------------------------------------------------------------------
+# --------------- pruebillas para hacer tracks--------------------------------
+stepsCampanilla = [1,0,1,0,0]
+stepsBass = [1,1,0,1,1]
+track1 = create_track(campanilla,stepsCampanilla)
+track2 = create_track(bass_cac_de_moun,stepsBass)
+
+mixTrack = np.add(track1,track2)
+audio = sanitize_audio(mixTrack)
+
+# 16 steps
+play_audio(audio)
 
