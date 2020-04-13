@@ -8,7 +8,9 @@ import simpleaudio as sa
 # GLOBAL VARIABLES
 
 bass_cac_de_moun = [210,265,234,171] # sonido como de bass caca de mono
-campanilla = [437.5,875,1180,1422 ] # campanilla fire
+#campanilla = [437.5,875,1180,1422 ] # campanilla fire
+#guitarra 
+campanilla = [110,220,330,440,550] # guitarrilla osea casi
 
 frequencies = campanilla # this is the list that will be played
 
@@ -105,10 +107,43 @@ def start_synth():
 # start_synth()
 
 
+# PUTADILLAS DE """""""""""""""""""GUI"""""""""""""""
+
+
+def cuantos_steps_va_metersh():
+    _steps = int(input("Enter Steps: "))
+    return _steps
+
+def get_arr(length):
+    return [0 for i in range(length)]
+
+def print_steps(_steps):
+    s = "|"
+    for step in _steps:
+        if(step==1):
+            s = s + "X|"
+        else:
+            s = s+ " |"
+    print(s)
+
+def get_equicillas(arr, titulo):
+    for i in  range(len(arr)):
+        print(titulo)
+        print_steps(arr)
+        arr[i] = int(input("Enter 1 for Step, 0 for Silence: "))
+    return arr
+
 # ----------------------------------------------------------------------------
 # --------------- pruebillas para hacer tracks--------------------------------
-stepsCampanilla = [1,0,1,0,0]
-stepsBass = [1,1,0,1,1]
+cuantos = cuantos_steps_va_metersh()
+stepsCampanilla = get_arr(cuantos)
+stepsBass = get_arr(cuantos)
+
+
+stepsCampanilla = get_equicillas(stepsCampanilla, "Campanas")
+stepsBass = get_equicillas(stepsBass , "Bass")
+
+
 track1 = create_track(campanilla,stepsCampanilla)
 track2 = create_track(bass_cac_de_moun,stepsBass)
 
@@ -116,5 +151,7 @@ mixTrack = np.add(track1,track2)
 audio = sanitize_audio(mixTrack)
 
 # 16 steps
+print_steps(stepsCampanilla)
+print_steps(stepsBass)
 play_audio(audio)
 

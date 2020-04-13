@@ -20,6 +20,7 @@ def main(stdscr):
         stdscr.addstr(7,20,"BPM:  121")
         stdscr.addstr(8,30,"SEQUENCER")
         stdscr.addstr(9,30,sequencer_to_str(i))
+        stdscr.addstr(10,30,sequencer_to_str(i))
         stdscr.refresh()
         time.sleep(0.1)
 
